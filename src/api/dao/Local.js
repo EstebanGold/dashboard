@@ -1,6 +1,6 @@
 import { users } from "../data/users";
 
-const Local = {
+export const Local = {
   getUser: user => {
     return new Promise(resolve => {
       users.find(u => {
@@ -10,5 +10,3 @@ const Local = {
     });
   }
 };
-
-export { Local };

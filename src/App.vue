@@ -2,8 +2,6 @@
   <v-app>
     <v-app-bar app color="primary" dark dense>
       <div class="d-flex align-center">
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
         <span class="title">FactSet</span>
       </div>
 
@@ -17,24 +15,45 @@
         <v-icon>mdi-on</v-icon>
       </v-btn>
     </v-app-bar>
+    <template v-if="active">
+      <navbar />
+    </template>
 
     <v-main>
       <div class="d-flex justify-center">
-        <!-- <navbar /> -->
         <router-view />
       </div>
     </v-main>
+    <v-footer
+      color="primary lighten-1 d-flex align-center justify-center"
+      dark
+      padless
+      fixed
+    >
+      <span class="title">{{ year }}</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-// import Navbar from "@/components/Navbar";
+import { mapState } from "vuex";
+
+import Navbar from "@/components/Navbar.vue";
 
 export default {
   name: "App",
-
-  // components: {
-  //   Navbar
-  // }
+  components: {
+    Navbar
+  },
+  data() {
+    return {
+      year: new Date().getFullYear()
+    };
+  },
+  computed: {
+    ...mapState({
+      active: state => state.users.userActive
+    })
+  }
 };
 </script>
